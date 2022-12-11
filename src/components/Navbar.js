@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 
 const Navbar = ({setCurrency}) => {
     const [nav, setNav] = useState(false);
+
+    
     const [currencies, setCurrencies] = useState([])
 
     const url = 'https://api.coingecko.com/api/v3/simple/supported_vs_currencies'

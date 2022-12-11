@@ -20,14 +20,14 @@ export const ThemeContext = createContext()
 export const ThemeProvider = ({ initialTheme, children }) => {
     const [theme, setTheme] = useState(getInitialTheme)
 
-    const rawSetTheme = (theme) => {
+    const rawSetTheme = (x) => {
         const root = window.document.documentElement;
-        const isDark = theme === 'dark'
+        const isDark = x === 'dark'
 
         root.classList.remove(isDark ? 'light' : 'dark')
-        root.classList.add(theme)
+        root.classList.add(x)
 
-        localStorage.setItem('color-theme', theme)
+        localStorage.setItem('color-theme', x)
     }
 
     if (initialTheme) {

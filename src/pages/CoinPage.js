@@ -28,15 +28,15 @@ const CoinPage = ({currency}) => {
         <img className='w-20 mr-8' src={coin.image?.large} alt='/' />
         <div>
           <p className='text-3xl font-bold'>{coin?.name} price</p>
-          <p>({coin.symbol?.toUpperCase()} / USD)</p>
+          <p>({coin.symbol?.toUpperCase()} / {currency})</p>
         </div>
       </div>
 
       <div className='grid md:grid-cols-2 gap-8'>
         <div>
           <div className='flex justify-between'>
-            {coin.market_data?.current_price ? (
-              <p className='text-3xl font-bold'>{currencySetter(coin.market_data.current_price[currency], currency)}</p>
+            {coin.market_data?.current_price[currency.toLowerCase()] ? (
+              <p className='text-3xl font-bold'>{currencySetter(coin?.market_data.current_price[currency.toLowerCase()], currency)}</p>
             ) : null}
             <p>7 Day</p>
           </div>
@@ -48,14 +48,14 @@ const CoinPage = ({currency}) => {
           <div className='flex justify-between py-4'>
             <div>
               <p className='text-gray-500 text-sm'>Market Cap</p>
-              {coin.market_data?.market_cap ? (
-                <p>{currencySetter(coin.market_data.market_cap[currency], currency)}</p>
+              {coin?.market_data?.market_cap[currency.toLowerCase()] ? (
+                <p>{currencySetter(coin?.market_data.market_cap[currency.toLowerCase()], currency)}</p>
               ) : null}
             </div>
             <div>
               <p className='text-gray-500 text-sm'>Volume (24h)</p>
-              {coin.market_data?.market_cap ? (
-                <p>{currencySetter(coin.market_data.total_volume[currency], currency)}</p>
+              {coin.market_data?.total_volume ? (
+                <p>{currencySetter(coin.market_data.total_volume[currency.toLowerCase()], currency)}</p>
               ) : null}
             </div>
           </div>
@@ -63,14 +63,14 @@ const CoinPage = ({currency}) => {
           <div className='flex justify-between py-4'>
             <div>
               <p className='text-gray-500 text-sm'>24h High</p>
-              {coin.market_data?.high_24h ? (
-                <p>{currencySetter(coin.market_data.high_24h[currency], currency)}</p>
+              {coin.market_data?.high_24h[currency.toLowerCase()] ? (
+                <p>{currencySetter(coin.market_data.high_24h[currency.toLowerCase()], currency)}</p>
               ) : null}
             </div>
             <div>
               <p className='text-gray-500 text-sm'>24h Low</p>
-              {coin.market_data?.low_24h ? (
-                <p>{currencySetter(coin.market_data.low_24h[currency], currency)}</p>
+              {coin.market_data?.low_24h[currency.toLowerCase()] ? (
+                <p>{currencySetter(coin.market_data.low_24h[currency.toLowerCase()], currency)}</p>
               ) : null}
             </div>
           </div>
