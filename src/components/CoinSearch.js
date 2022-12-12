@@ -16,21 +16,23 @@ const CoinSearch = () => {
         })
     }, [currency])
 
-
+    const [searchCoin, setSearchCoin] = useState('')
     console.log('Here is the CoinSearch Data-->', coins)
     
     return (
         <div className="rounded-div my-4">
 
-            <div className='flex flex-col md:flex-row justify-between pt-4 pb-6 text-center md:text-right'>
-                <h1 className='text-2xl font-bold my-2'>Search Crypto</h1>
-                <form>
-                    <input className='w-full bg-primary border border-input px-4 py-2 rounded-2xl shadow-xl' type="text" placeholder='Search a coin' />
-                </form>
+            <div className='pt-6 pb-10 flex justify-center text-center'>
+                <div className='flex flex-col md:flex-row w-full'>
+                    <h1 className='text-2xl font-bold my-1 mr-2 ml-8'>Search Crypto</h1>
+                    <form>
+                        <input onChange={(e) => setSearchCoin(e.target.value)} className='w-full bg-primary border border-input px-4 py-2 rounded-2xl shadow-xl' type='text' placeholder='Search a coin' />
+                    </form>
+                </div>
             </div>
 
             <table className="w-full border-collapse text-center">
-                <thead>
+                <thead> 
                      <tr className='border-b'>
                         <th className='px-4'>#</th>
                         <th className='tetxt-left'>Coin</th>
@@ -44,9 +46,17 @@ const CoinSearch = () => {
                 </thead>
 
                 <tbody>
-                     {coins.map(coin=> (
-                      <CoinItem coin={coin}/>
-                    ))}
+                     {
+                         coins.filter(value => {
+                             if(searchCoin === '' ){
+                                 return value
+                             }else if (value.name.toLowerCase().includes(searchCoin.toLowerCase())){
+                                 return value
+                             }
+                         }).map(coin=> (
+                            <CoinItem coin={coin}/>
+                            ))
+                    }
                 </tbody>
 
             </table>
