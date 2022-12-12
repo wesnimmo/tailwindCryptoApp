@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { Sparklines, SparklinesLine } from 'react-sparklines';
-import { FaTwitter, FaFacebook, FaReddit, FaGithub } from 'react-icons/fa'
+import { FaTwitter, FaFacebook, FaReddit, FaGithub } from 'react-icons/fa';
+import { AiFillCaretUp, AiOutlineCaretDown } from 'react-icons/ai'
 import DOMPurify from 'dompurify'
 import { useParams } from 'react-router-dom';
 import currencySetter from '../utilities/currencySetter'
@@ -21,7 +22,14 @@ const CoinPage = () => {
             setCoin(response.data)
             console.log('CoinPage Comp data-->', response.data)
         })
-    }, [currency])
+    }, [currency]);
+
+    const priceChangeUp_24 = coin?.market_data?.price_change_percentage_24h > 0;
+    const priceChangeUp_7d = coin?.market_data?.price_change_percentage_7d > 0;
+    const priceChangeUp_14d = coin?.market_data?.price_change_percentage_14d > 0;
+    const priceChangeUp_30d = coin?.market_data?.price_change_percentage_30d > 0;
+    const priceChangeUp_60d = coin?.market_data?.price_change_percentage_60d > 0;
+    const priceChangeUp_1y =  coin?.market_data?.price_change_percentage_1y > 0;
     
     return (
      <div className='rounded-div my-12 py-8'>
@@ -96,47 +104,51 @@ const CoinPage = () => {
           <div className='flex justify-between py-4'>
             <div>
               <p className='text-gray-500 text-sm'>Price Change (24h)</p>
-              {coin.market_data ? (
-                <p className='text-green-600'>{coin.market_data.price_change_percentage_24h.toFixed(2)}%</p>
-              ) : null}
+              <p className={priceChangeUp_24 ? 'text-green-600 flex items-center' : 'text-red-600 flex items-center'}>
+                {coin?.market_data?.price_change_percentage_24h.toFixed(2)}%
+                {priceChangeUp_24 ? <AiFillCaretUp/> : <AiOutlineCaretDown />}
+              </p>
             </div>
+
             <div>
               <p className='text-gray-500 text-sm'>Price Change (7d)</p>
-              {coin.market_data ? (
-                <p>{coin.market_data.price_change_percentage_7d.toFixed(2)}%</p>
-              ) : null}
+               <p className={priceChangeUp_7d ? 'text-green-600 flex items-center' : 'text-red-600 flex items-center'}>
+                {coin?.market_data?.price_change_percentage_7d.toFixed(2)}%
+                {priceChangeUp_7d ? <AiFillCaretUp/> : <AiOutlineCaretDown />}
+              </p>
             </div>
+
             <div>
               <p className='text-gray-500 text-sm'>Price Change (14d)</p>
-              {coin.market_data ? (
-                <p>
-                  {coin.market_data.price_change_percentage_14d.toFixed(2)}%
-                </p>
-              ) : null}
+              <p className={priceChangeUp_14d ? 'text-green-600 flex items-center' : 'text-red-600 flex items-center'}>
+                {coin?.market_data?.price_change_percentage_14d.toFixed(2)}%
+                {priceChangeUp_14d ? <AiFillCaretUp/> : <AiOutlineCaretDown />}
+              </p>
             </div>
           </div>
           <div className='flex justify-between py-4'>
+
             <div>
               <p className='text-gray-500 text-sm'>Price Change (30d)</p>
-              {coin.market_data ? (
-                <p>
-                  {coin.market_data.price_change_percentage_30d.toFixed(2)}%
-                </p>
-              ) : null}
+              <p className={priceChangeUp_30d ? 'text-green-600 flex items-center' : 'text-red-600 flex items-center'}>
+                {coin?.market_data?.price_change_percentage_30d.toFixed(2)}%
+                {priceChangeUp_30d ? <AiFillCaretUp/> : <AiOutlineCaretDown />}
+              </p>
             </div>
+            
             <div>
               <p className='text-gray-500 text-sm'>Price Change (60d)</p>
-              {coin.market_data ? (
-                <p>
-                  {coin.market_data.price_change_percentage_60d.toFixed(2)}%
-                </p>
-              ) : null}
+              <p className={priceChangeUp_60d ? 'text-green-600 flex items-center' : 'text-red-600 flex items-center'}>
+                {coin?.market_data?.price_change_percentage_60d.toFixed(2)}%
+                {priceChangeUp_60d ? <AiFillCaretUp/> : <AiOutlineCaretDown />}
+              </p>
             </div>
             <div>
               <p className='text-gray-500 text-sm'>Price Change (1y)</p>
-              {coin.market_data ? (
-                <p>{coin.market_data.price_change_percentage_1y.toFixed(2)}%</p>
-              ) : null}
+              <p className={priceChangeUp_1y ? 'text-green-600 flex items-center' : 'text-red-600 flex items-center'}>
+                {coin?.market_data?.price_change_percentage_1y.toFixed(2)}%
+                {priceChangeUp_1y ? <AiFillCaretUp/> : <AiOutlineCaretDown />}
+              </p>
             </div>
           </div>
           <div className='flex justify-around p-8 text-accent'>
