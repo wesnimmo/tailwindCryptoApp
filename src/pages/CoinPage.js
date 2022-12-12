@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { FaTwitter, FaFacebook, FaReddit, FaGithub } from 'react-icons/fa'
 import DOMPurify from 'dompurify'
 import { useParams } from 'react-router-dom';
 import currencySetter from '../utilities/currencySetter'
+import { CurrencyContext } from '../context/CurrencyContext'
 
 
-const CoinPage = ({currency}) => {
+const CoinPage = () => {
 
+    const {currency, setCurrency} = useContext(CurrencyContext)
     const [coin, setCoin] = useState({});
     const params = useParams()
 

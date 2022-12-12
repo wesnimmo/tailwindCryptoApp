@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
 import ThemeToggle from './ThemeToggle';
 import { Link } from 'react-router-dom';
+import { CurrencyContext } from '../context/CurrencyContext'
 
 
 
-const Navbar = ({setCurrency}) => {
+const Navbar = () => {
     const [nav, setNav] = useState(false);
 
-    
+    const {currency, setCurrency} = useContext(CurrencyContext)
     const [currencies, setCurrencies] = useState([])
 
     const url = 'https://api.coingecko.com/api/v3/simple/supported_vs_currencies'
@@ -44,7 +45,7 @@ const Navbar = ({setCurrency}) => {
                <select
                     onChange={(e) => handleChange(e.target.value)}
                 >
-                    <option value="usd">USD</option>
+                    <option value="usd">{currency.toUpperCase()}</option>
                    {
                     currencies.map((currency) => {
                         return (

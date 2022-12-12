@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CoinItem from './CoinItem'
 import axios from 'axios'
+import { CurrencyContext } from '../context/CurrencyContext'
 
-const CoinSearch = ({currency}) => {
+const CoinSearch = () => {
+
+    const {currency, setCurrency} = useContext(CurrencyContext)
 
     const [coins, setCoins] = useState([]) 
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=gecko_desc&per_page=10&page=1&sparkline=true&price_change_percentage='24h'`
@@ -42,7 +45,7 @@ const CoinSearch = ({currency}) => {
 
                 <tbody>
                      {coins.map(coin=> (
-                      <CoinItem coin={coin} currency={currency} />
+                      <CoinItem coin={coin}/>
                     ))}
                 </tbody>
 

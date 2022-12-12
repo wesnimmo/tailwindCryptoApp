@@ -1,10 +1,13 @@
-import React from 'react'
+import React, {useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import currencySetter from '../utilities/currencySetter'
 import abbrCurrencySetter from '../utilities/abbrCurrencySetter'
+import { CurrencyContext } from '../context/CurrencyContext'
 
-const CoinItem = ({coin, currency}) => {
+const CoinItem = ({coin}) => {
+
+    const {currency, setCurrency} = useContext(CurrencyContext)
     return (
        <tr className="h-[80px] border-b overflow-hidden">
          <td>{coin.market_cap_rank}</td>
