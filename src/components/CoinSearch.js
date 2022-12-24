@@ -32,7 +32,7 @@ const CoinSearch = () => {
             dataLength={coins.length}
             next={() => getCoins(coins.length + 10)}
             hasMore={coins && coins.length >= 100 ? false : true}
-            loader={<h4>Loading...</h4>}
+            loader={<h1 className="text-center">Loading...</h1>}
         > 
             <div className="rounded-div my-4">
 
@@ -58,7 +58,7 @@ const CoinSearch = () => {
                             <th>Last 7 Days</th>
                         </tr>
                     </thead>
-
+                    
                     <tbody>
                         {
                             coins.filter(value => {
@@ -67,7 +67,7 @@ const CoinSearch = () => {
                                 }else if (value.name.toLowerCase().includes(searchCoin.toLowerCase())){
                                     return value
                                 }
-                            }).map(coin=> (
+                            }).sort((a,b) => a.market_cap_rank - b.market_cap_rank).map(coin=> (
                                 <CoinItem coin={coin}/>
                                 ))
                         }

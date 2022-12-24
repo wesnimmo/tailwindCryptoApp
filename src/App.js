@@ -5,8 +5,11 @@ import { ThemeProvider } from './context/ThemeContext';
 import { CurrencyProvider } from './context/CurrencyContext'
 import CoinPage from './pages/CoinPage';
 import Home from './pages/Home';
+import { getInitialTheme } from './utilities/initialValueGetter'
 
 function App() {
+
+  
 
   // const [currency, setCurrency] = useState('USD')
   
@@ -19,7 +22,7 @@ function App() {
   // }, [currency])
 
   return (
-    <ThemeProvider>
+    <ThemeProvider initialTheme={getInitialTheme()}>
       <CurrencyProvider>
         <Navbar/>
          <Routes>

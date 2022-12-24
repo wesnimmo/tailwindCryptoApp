@@ -1,16 +1,7 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, { useState, useEffect, createContext } from 'react';
+import { getInitialCurrency } from '../utilities/initialValueGetter'
 
-const getInitialCurrency = () => {
 
-    const localCurrency = window.localStorage.getItem('currency');
-    // localCurrency !== null ? localCurrency : "USD";
-    if(localCurrency !== null){
-        return localCurrency
-    } else{
-        return 'USD'
-    }
-
-}
 
 export const CurrencyContext = createContext();
 
