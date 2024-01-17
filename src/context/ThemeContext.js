@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, { useState, useEffect, createContext } from "react";
 
 // const getInitialTheme = () => {
 //     if (typeof window !== 'undefined' && window.localStorage) {
@@ -15,32 +15,32 @@ import React, { useState, useEffect, createContext } from 'react'
 //     return 'light'
 // }
 
-export const ThemeContext = createContext()
+export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ initialTheme, children }) => {
-    const [theme, setTheme] = useState(initialTheme)
+  const [theme, setTheme] = useState(initialTheme);
 
-    const rawSetTheme = (x) => {
-        const root = window.document.documentElement;
-        const isDark = x === 'dark'
+  const rawSetTheme = (x) => {
+    const root = window.document.documentElement;
+    const isDark = x === "dark";
 
-        root.classList.remove(isDark ? 'light' : 'dark')
-        root.classList.add(x)
+    root.classList.remove(isDark ? "light" : "dark");
+    root.classList.add(x);
 
-        localStorage.setItem('color-theme', x)
-    }
+    localStorage.setItem("color-theme", x);
+  };
 
-    if (initialTheme) {
-        rawSetTheme(initialTheme)
-    }
+  if (initialTheme) {
+    rawSetTheme(initialTheme);
+  }
 
-    useEffect(() => {
-        rawSetTheme(theme)
-    }, [theme])
+  useEffect(() => {
+    rawSetTheme(theme);
+  }, [theme]);
 
-    return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
-            {children}
-        </ThemeContext.Provider>
-    )
-}
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};

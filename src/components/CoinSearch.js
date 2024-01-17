@@ -76,6 +76,7 @@ const CoinSearch = () => {
                 </table>
 
             </div>
+            {console.log('Infinite Scroll-->',coins)}
         </InfiniteScroll>
     )
 }
